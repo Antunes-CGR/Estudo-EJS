@@ -1,6 +1,7 @@
 const express = require('express')
 const ejs = require('ejs')
 const bodyParser = require('body-parser')
+const {faker}  = require('@faker-js/faker')
 const expressLayouts = require('express-ejs-layouts')
 
 const app = express()
@@ -24,9 +25,37 @@ app.get('/', (req, res) => {
   return res.render('pages/home')
 })
 
-app.post('/about', (req, res) => {
-  res.send('Texto: ' + req.body.titulo + "Conteúdo: " + req.body.conteudo)})
+app.get('/about', (req, res) => {
+  var users = [
+    { 
+      name: faker.name.fullName(),
+      email: faker.internet.email(),
+      avatar: 'http://placebear.com/300/300'
+    }, 
+    {
+      name: faker.name.fullName(),
+      email: faker.internet.email(),
+      avatar: 'http://placebear.com/400/300'
+    },
+    {
+      name: faker.name.fullName(),
+      email: faker.internet.email(),
+      avatar: 'http://placebear.com/500/300'
+    }
+  ]
 
+  res.render('pages/about', {
+      usuarios: users
+  })
+})
+
+app.get('/contact', (req, res) => {
+  res.render('pages/contact')
+})
+
+app.post('/contact', (req, res) => {
+  res.send('Obrigado por entrar em contato conosco, ' + req.body.name + '! Responderemos em breve!')
+})
 app.get('/contact', (req, res) => {
   res.render('pages/contact')
 })
