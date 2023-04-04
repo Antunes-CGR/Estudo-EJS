@@ -1,12 +1,7 @@
-<%- contentFor('body') %>
-<div class="jumbotron text-center">
-    <h1>O Time!</h1>
-    <div class="row">
-        <% for (usuario of usuarios){%>
-            <div class="col-sm-4">
-                <h2><%= usuario.name %></h2>
-                <img class="img-responsive" style="height: 250px" src="<%= usuario.avatar %>">
-            </div>
-            <% } %>
-    </div>
-</div>
+<form action="/add" method="POST">
+    <p>Titulo: </p>
+    <input type="text" name="titulo">
+    <p>Conteúdo: </p>
+    <textarea name="conteudo"></textarea>
+    <button type="submit"> Cadastrar postagem </button>
+</form>
